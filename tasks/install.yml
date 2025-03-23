@@ -1,0 +1,21 @@
+---
+- name: Install Fail2Ban - Debian
+  apt:
+    name: fail2ban
+    state: latest
+  notify: Restart Fail2Ban
+  when: ansible_os_family == "Debian"
+
+- name: Install Fail2Ban - Arch
+  pacman:
+    name: fail2ban
+    state: latest
+  notify: Restart Fail2Ban
+  when: ansible_os_family == "Archlinux"
+
+- name: Install Fail2Ban - Redhat
+  dnf:
+    name: fail2ban
+    state: latest
+  notify: Restart Fail2Ban
+  when: ansible_os_family == "RedHat"

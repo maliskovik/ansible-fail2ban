@@ -1,0 +1,33 @@
+---
+- name: Configure Fail2Ban
+  template:
+    mode: 0644
+    owner: root
+    group: root
+    src: "jail.local"
+    dest: "{{ fail2ban_main_config }}"
+  notify: Restart Fail2Ban
+
+- name: SSH Fail2Ban  config
+  template:
+    mode: 0644
+    owner: root
+    group: root
+    src: "sshd.local"
+    dest: "{{ fail2ban_confd_dir }}/sshd.local"
+  notify: Restart Fail2Ban
+
+- name: Create UFW action
+  template:
+    mode: 0644
+    owner: root
+    group: root
+    src: "action_ufw"
+    dest: "{{ fail2ban_action_dir }}/ufw.conf"
+  notify: Restart Fail2Ban
+
+- name: Start Fail2Ban
+  service:
+    name: fail2ban
+    state: started
+    enabled: yes

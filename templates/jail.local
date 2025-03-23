@@ -1,0 +1,8 @@
+[DEFAULT]
+destemail = {{ fail2ban_email_recipient }}
+sender = {{ fail2ban_email_sender }}
+banaction = {{ fail2ban_banaction }}
+banaction_allports = ufw[type=allports]
+
+# to ban & send an e-mail with whois report to the destemail.
+action = %(action_mw)s
