@@ -1,8 +1,13 @@
 [DEFAULT]
+findtime = {{ fail2ban_findtime }}
 destemail = {{ fail2ban_email_recipient }}
 sender = {{ fail2ban_email_sender }}
 banaction = {{ fail2ban_banaction }}
 banaction_allports = ufw[type=allports]
+mta = sendmail
 
 # to ban & send an e-mail with whois report to the destemail.
 action = %(action_mw)s
+
+action_mw = %(action_)s
+            %(mta)s-whois[sender="%(sender)s", dest="%(destemail)s", protocol="%(protocol)s", chain="%(chain)s"]

@@ -2,14 +2,16 @@
 ## Config defaults
 fail2ban_email_sender: yourname@example.com
 fail2ban_email_recipient: yourname@example.com
-fail2ban_banaction: ufw
+fail2ban_banaction: iptables-allports
 fail2ban_conf_dir: /etc/fail2ban
 fail2ban_action_dir: "{{ fail2ban_conf_dir }}/action.d"
-
+fail2ban_findtime: "1d"
+fail2ban_bantime: "1w"
+fail2ban_maxretry: 3
 ## Defaults for SSH filter
 fail2ban_sshd_enabled: "true"
-fail2ban_sshd_banaction: "ufw"
-fail2ban_sshd_maxretry: 5
+fail2ban_sshd_banaction: "iptables-allports"
+fail2ban_sshd_maxretry: 3
 fail2ban_sshd_findtime: "1d"
-fail2ban_sshd_bantime: "2w"
+fail2ban_sshd_bantime: "2mo"
 fail2ban_sshd_ignoreip: "127.0.0.1/8"
